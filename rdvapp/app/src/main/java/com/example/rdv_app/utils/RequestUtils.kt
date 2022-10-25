@@ -28,7 +28,7 @@ object RequestUtils {
     }
 
     fun getAllFilms(): List<FilmBean> {
-        val json = sendGet(URL_GET_FILMS)
+        val json = sendGet(URL_GET_FILM_OPEN)
 
         //Parser le JSON avec le bon bean et GSON
         val listOfStationBean: Type = object : TypeToken<List<FilmBean?>?>() {}.type
