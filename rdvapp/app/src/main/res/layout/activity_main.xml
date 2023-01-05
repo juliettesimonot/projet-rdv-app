@@ -1,90 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DFDFDF"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="80dp"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/header" />
     </LinearLayout>
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDates"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
+        android:layout_marginHorizontal="2dp"
+        android:layout_marginVertical="10dp"
+        android:scrollbars="horizontal"
+        tools:itemCount="1"
+        tools:listitem="@layout/date_button" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:fontFamily="@font/futura_bold"
-            android:text="Suggestions de films pour vous"
-            android:textColor="#E13E31"
-            android:textSize="16sp" />
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="10dp"-->
+    <!--        android:orientation="vertical">-->
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginBottom="5dp"-->
+    <!--            android:fontFamily="@font/futura_bold"-->
+    <!--            android:text="Suggestions de films pour vous"-->
+    <!--            android:textColor="#E13E31"-->
+    <!--            android:textSize="16sp" />-->
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="230dp">
+    <!--        <HorizontalScrollView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content">-->
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="7dp"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/testposter" />
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="230dp">-->
 
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="7dp"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/testposter" />
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/imageView2"-->
+    <!--                    android:layout_width="0dp"-->
+    <!--                    android:layout_height="match_parent"-->
+    <!--                    android:layout_marginRight="7dp"-->
+    <!--                    android:layout_weight="1"-->
+    <!--                    android:scaleType="centerCrop"-->
+    <!--                    app:srcCompat="@drawable/testposter" />-->
 
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="7dp"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/testposter" />
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/imageView4"-->
+    <!--                    android:layout_width="0dp"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginRight="7dp"-->
+    <!--                    android:layout_weight="1"-->
+    <!--                    android:scaleType="centerCrop"-->
+    <!--                    app:srcCompat="@drawable/testposter" />-->
 
-            </LinearLayout>
-        </HorizontalScrollView>
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/imageView5"-->
+    <!--                    android:layout_width="0dp"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginRight="7dp"-->
+    <!--                    android:layout_weight="1"-->
+    <!--                    android:scaleType="centerCrop"-->
+    <!--                    app:srcCompat="@drawable/testposter" />-->
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#FFFFFF"
-            android:text="Voir toute la programmation"
-            android:textColor="#A9A8A8"
-            app:strokeColor="#A9A8A8"
-            app:strokeWidth="2dp" />
+    <!--            </LinearLayout>-->
+    <!--        </HorizontalScrollView>-->
 
-    </LinearLayout>
+    <!--        <Button-->
+    <!--            android:id="@+id/button"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:backgroundTint="#FFFFFF"-->
+    <!--            android:text="Voir toute la programmation"-->
+    <!--            android:textColor="#A9A8A8"-->
+    <!--            app:strokeColor="#A9A8A8"-->
+    <!--            app:strokeWidth="2dp" />-->
+
+    <!--    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,21 +105,47 @@
         android:layout_margin="10dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:fontFamily="@font/futura_bold"
-            android:text="À l’affiche cette semaine"
-            android:textColor="#E13E31"
-            android:textSize="16sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvAffiche"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/futura_bold"
+                android:text="À l’affiche"
+                android:textColor="#E13E31"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvDateTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/futura_bold"
+                android:text="cette semaine"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Il n'y a pas de films à l'affiche ce jour-ci" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_filmCards"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="400dp"
+            android:layout_weight="1"
             tools:listitem="@layout/film_card" />
+
     </LinearLayout>
+
 
 </LinearLayout>
