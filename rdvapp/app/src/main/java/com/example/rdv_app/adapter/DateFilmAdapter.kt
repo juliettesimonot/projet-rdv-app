@@ -12,23 +12,18 @@ import com.example.rdv_app.model.ShowTimeBean
 class DateFilmAdapter : ListAdapter<ShowTimeBean, DateFilmAdapter.ViewHolder>(
     DateFilmAdapter.Comparator()){
 
-
     class ViewHolder(var binding : DateFilmBinding) : RecyclerView.ViewHolder(binding.root)
 
     class Comparator : DiffUtil.ItemCallback<ShowTimeBean>() {
         override fun areItemsTheSame(oldItem: ShowTimeBean, newItem: ShowTimeBean): Boolean =
             oldItem === newItem
 
-
         override fun areContentsTheSame(oldItem: ShowTimeBean, newItem: ShowTimeBean): Boolean =
             false
     }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(DateFilmBinding.inflate(LayoutInflater.from(parent.context)))
-
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

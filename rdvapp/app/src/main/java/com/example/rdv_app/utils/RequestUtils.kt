@@ -28,6 +28,18 @@ object RequestUtils {
         }
     }
 
+
+    fun getFilmByDate(date :String): List<FilmBean> {
+        val json = sendGet(URL_GET_FILMS_BY_DATE+date+"--Nkhjkvgjv")
+
+        //Parser le JSON avec le bon bean et GSON
+        val listOfFilmBean: Type = object : TypeToken<List<FilmBean?>?>() {}.type
+
+        return gson.fromJson(json, listOfFilmBean)
+    }
+
+
+
     fun getAllFilms(): List<FilmBean> {
         val json = sendGet(URL_GET_FILM_OPEN)
 
@@ -48,14 +60,7 @@ object RequestUtils {
         return gson.fromJson(json, listOfFilmBean)
     }
 
-    fun getFilmByDate(date :String): List<FilmBean> {
-        val json = sendGet(URL_GET_FILMS_BY_DATE+date)
 
-        //Parser le JSON avec le bon bean et GSON
-        val listOfFilmBean: Type = object : TypeToken<List<FilmBean?>?>() {}.type
-
-        return gson.fromJson(json, listOfFilmBean)
-    }
 
 
     fun getShowTimesByFilm(filmKey :Int): List<ShowTimeBean> {

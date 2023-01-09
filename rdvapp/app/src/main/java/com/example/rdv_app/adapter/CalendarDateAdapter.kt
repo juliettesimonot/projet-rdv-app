@@ -14,9 +14,7 @@ import com.example.rdv_app.model.DateBean
 
 class CalendarDateAdapter : ListAdapter<String, CalendarDateAdapter.ViewHolder>(
     CalendarDateAdapter.Comparator()){
-
     var onDateClick : ((String)->Unit)?=null
-
 
     class ViewHolder(var binding : DateButtonBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -44,7 +42,6 @@ class CalendarDateAdapter : ListAdapter<String, CalendarDateAdapter.ViewHolder>(
 
         holder.binding.tvDate.setOnClickListener(View.OnClickListener {
             onDateClick?.invoke(currentItem)
-//            Toast.makeText(holder.binding.tvMonth.context, "Voici la position : "+position, Toast.LENGTH_SHORT).show()
         })
 
     }

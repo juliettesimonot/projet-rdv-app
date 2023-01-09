@@ -10,14 +10,31 @@ import java.time.LocalDate
 import kotlin.concurrent.thread
 
 class MainViewModel : ViewModel() {
-    var dateMonth = MutableLiveData<List<String>>(ArrayList<String>())
     var dateSelected = MutableLiveData<String>()
-    var textInfo = MutableLiveData(false)
-
+    var textInfo = MutableLiveData("")
     var dataShow = MutableLiveData<List<FilmBean>>(ArrayList<FilmBean>())
-    var errorMessage = MutableLiveData("")
     var listFilms = ArrayList<FilmBean>()
     var runInProgress = MutableLiveData(false)
+    var dateMonth = MutableLiveData<List<String>>(ArrayList<String>())
+
+    fun loadFilmsByDay(day:String){
+        textInfo.postValue(null);
+        thread {
+            try {
+                listFilms = ArrayList(RequestUtils.getFilmByDate(day))
+                dataShow.postValue(listFilms)
+                if(listFilms.size==0){
+                    textInfo.postValue("Il n'y a pas de films à l'affiche ce jour-ci")
+                }
+            }
+            catch (e: Exception) {
+                e.printStackTrace();
+                textInfo.postValue("Une erreur est survenue, veuillez réessayer ultérieurement")
+                dataShow.postValue(arrayListOf())
+            }
+            dateSelected.postValue("le ${day.split('-')[2].slice(0..1)} / ${day.split('-')[1]}")
+        }
+    }
 
 
     fun loadDatesMonth(){
@@ -36,8 +53,10 @@ class MainViewModel : ViewModel() {
 
 
 
+
+
     fun loadDataAllFilms(){
-        errorMessage.postValue(null);
+        textInfo.postValue(null);
         runInProgress.postValue(true);
 
         thread {
@@ -47,7 +66,8 @@ class MainViewModel : ViewModel() {
             }
             catch (e: Exception) {
                 e.printStackTrace();
-                errorMessage.postValue("Une erreur est survenue : ${e.message}")
+                textInfo.postValue("Une erreur est survenue, veuillez réessayer ultérieurement")
+                dataShow.postValue(arrayListOf())
             }
             //Tache asynchrone terminé
             runInProgress.postValue(false);
@@ -56,31 +76,7 @@ class MainViewModel : ViewModel() {
     }
 
 
-    fun loadFilmsByDay(day:String){
 
-        thread {
-            var boolean = false
-            try {
-
-                listFilms = ArrayList(RequestUtils.getFilmByDate(day))
-                dataShow.postValue(listFilms)
-                if(listFilms.size==0){
-                    boolean = true
-                }
-
-            }
-            catch (e: Exception) {
-                e.printStackTrace();
-                errorMessage.postValue("Une erreur est survenue : ${e.message}")
-            }
-
-            textInfo.postValue(boolean)
-            dateSelected.postValue("le ${day.split('-')[2].slice(0..1)} / ${day.split('-')[1]}")
-
-        }
-
-
-    }
 
 
     fun loadFilmsDay(date:DateBean){
@@ -114,7 +110,7 @@ class MainViewModel : ViewModel() {
             boolean = true
         }
 
-        textInfo.postValue(boolean)
+        textInfo.postValue("")
         dataShow.postValue(newListFilmsDay)
         dateSelected.postValue("le ${date.day} ${date.month}")
     }

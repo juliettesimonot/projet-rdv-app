@@ -1,9 +1,11 @@
 package com.example.rdv_app
 
+import android.content.ComponentName
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     val model by lazy{ ViewModelProvider(this).get(MainViewModel::class.java)}
 
 
+    //Pour les recyclerview
     val filmAdapter = FilmCardAdapter()
     val calendarAdapter = CalendarDateAdapter()
 
@@ -52,19 +55,20 @@ class MainActivity : AppCompatActivity() {
         binding.rvFilmCards.adapter = filmAdapter
         binding.rvDates.adapter = calendarAdapter
 
+        calendarAdapter.onDateClick = {
+            model.loadFilmsByDay(it)
+        }
+
         filmAdapter.onFilmClick = {
             val intent = Intent(this, FilmActivity::class.java)
             intent.putExtra("film", it.film_key)
+
 
 //            finish()
             // Lance le workflow de changement d'écran
             startActivity(intent);
         }
 
-
-        calendarAdapter.onDateClick = {
-            model.loadFilmsByDay(it)
-        }
 
 
         //Combien on veut de colonne
@@ -85,16 +89,18 @@ class MainActivity : AppCompatActivity() {
             filmAdapter.submitList(it.toList())
         }
 
-        model.dateMonth.observe(this){
-            calendarAdapter.submitList(it.toList())
-        }
-
         model.dateSelected.observe(this){
             binding.tvDateTitle.text = it
         }
 
+        model.dateMonth.observe(this){
+            calendarAdapter.submitList(it.toList())
+        }
+
+
+
         model.textInfo.observe(this){
-            binding.tvInfo.isVisible = it
+            binding.tvInfo.text = it
         }
 
     }
